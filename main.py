@@ -12,10 +12,10 @@ def asking(qList, character, ch, window):
     criterion = 8   # 점수 기준
     ok = False  # criterion 이상의 점수를 받은 캐릭터가 있는지 여부
     m = ''   # criterion 이상의 점수를 받은 캐릭터 이름
-    #ommand= lambda: action(someNumber)
+
     # 질문 리스트를 돌며 질문하고 대답을 저장
-    # random.shuffle(qList)
-    answer = IntVar()   
+    random.shuffle(qList)
+    answer = IntVar()
     for i in range(len(qList)):
         Q = Label(window, text=qList[i][0], font=('궁서체',20))
         Q.pack()
@@ -28,7 +28,6 @@ def asking(qList, character, ch, window):
         dontknow.pack()
         yes.wait_variable(answer)
 
-        # answer 계산. answer가 1,2,3이므로 맞다, 아니다, 모른다를 1,-1,0으로 환산
         if answer.get() == 1 or answer.get() == 0:
             for j in range(0,len(character)):
                 if answer.get() == qList[i][j + 2]:
@@ -46,10 +45,10 @@ def asking(qList, character, ch, window):
 
         # 기준 점수 이상을 받은 캐릭터가 있고 동점이 없으면 출력, 동점이 있으면 계속 진행
         if ok:
-            highestScore = []
+            highestScore = []   # 기준 점수 이상을 받은 모든 캐릭터
             for j in range(len(character)):
                 if character[m][1] == character[j][1]:
-                    highestScore.append(j)  #해당 캐릭터의 인덱스
+                    highestScore.append(j)  # 해당 캐릭터의 인덱스
             if len(highestScore) == 1:
                 window.geometry('1000x800')
                 photo = PhotoImage(file="./image/"+ch[highestScore[0]]+".png")
